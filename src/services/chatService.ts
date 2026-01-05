@@ -33,7 +33,17 @@ export async function sendMessage(
       'Content-Type': 'application/json',
     };
 
-    const url = `${config.serviceUrl}/api/query`;
+    // Si estamos en desarrollo y la URL es localhost, usar proxy de Vite
+    const isDevelopment = import.meta.env.DEV;
+    const isLocalhost = config.serviceUrl.includes('localhost') || config.serviceUrl.includes('127.0.0.1');
+    
+    let url: string;
+    if (isDevelopment && isLocalhost) {
+      // Usar proxy de Vite para evitar CORS
+      url = `/api/query`;
+    } else {
+      url = `${config.serviceUrl}/api/query`;
+    }
 
     const response = await axios.post<ChatResponse>(url, requestBody, {
       headers,

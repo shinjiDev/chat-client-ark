@@ -148,6 +148,28 @@ El cliente envía automáticamente los siguientes headers:
 
 ## 🐛 Solución de Problemas
 
+### Error de CORS (Cross-Origin Resource Sharing)
+
+Si ves errores de CORS al intentar conectar con Azure Functions local:
+
+**Solución automática**: El proyecto está configurado con un proxy de Vite que resuelve automáticamente los problemas de CORS en desarrollo. Cuando uses `http://localhost:7071` en modo desarrollo, las peticiones se redirigen automáticamente a través del proxy.
+
+**Si el proxy no funciona**:
+1. Asegúrate de que el backend esté corriendo en `http://localhost:7071`
+2. Reinicia el servidor de desarrollo de Vite (`npm run dev`)
+3. Verifica que la URL configurada sea exactamente `http://localhost:7071`
+
+**Solución alternativa (configurar CORS en Azure Functions)**:
+Si prefieres configurar CORS directamente en Azure Functions, agrega esto a tu `local.settings.json`:
+
+```json
+{
+  "Host": {
+    "CORS": "http://localhost:5173,http://localhost:3000,http://localhost:5174"
+  }
+}
+```
+
 ### Error de conexión al servidor
 
 Si ves el error "No se pudo conectar con el servidor":
