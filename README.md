@@ -133,6 +133,10 @@ ChatClient/
 
 No se requieren variables de entorno. La configuración se realiza a través de la interfaz de usuario.
 
+### Proxy de Desarrollo
+
+El proyecto está configurado con un proxy de Vite para evitar problemas de CORS durante el desarrollo. Cuando uses `http://localhost:7071` en modo desarrollo, las peticiones a `/api/*` se redirigen automáticamente al backend a través del proxy.
+
 ### Headers del API
 
 El cliente envía automáticamente los siguientes headers:
