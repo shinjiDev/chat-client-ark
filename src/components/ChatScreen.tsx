@@ -27,11 +27,27 @@ export const ChatScreen: React.FC = () => {
     >
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
             Chat Client
+            {config?.useMock && (
+              <Typography
+                component="span"
+                variant="caption"
+                sx={{
+                  ml: 2,
+                  bgcolor: 'warning.main',
+                  color: 'warning.contrastText',
+                  px: 1,
+                  py: 0.5,
+                  borderRadius: 1,
+                }}
+              >
+                MODO MOCK
+              </Typography>
+            )}
           </Typography>
           <Typography variant="body2" sx={{ mr: 2 }}>
-            {config?.userId} | {config?.serviceUrl}
+            {config?.userId} | {config?.useMock ? 'Mock Mode' : config?.serviceUrl}
           </Typography>
           <IconButton
             color="inherit"
@@ -69,4 +85,5 @@ export const ChatScreen: React.FC = () => {
     </Box>
   );
 };
+
 
